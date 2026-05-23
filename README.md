@@ -34,6 +34,20 @@ Or with docker-compose:
 docker compose up --build
 ```
 
+## Kubernetes Deployment
+
+### Dev
+```bash
+helm upgrade --install insiderone-api charts/insiderone-api \
+-f charts/insiderone-api/values-dev.yaml
+```
+
+### Prod
+```bash
+helm upgrade --install insiderone-api charts/insiderone-api \
+-f charts/insiderone-api/values-prod.yaml
+```
+
 ## Test instructions
 Run tests:
 ```bash
