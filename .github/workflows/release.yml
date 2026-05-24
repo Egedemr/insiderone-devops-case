@@ -31,7 +31,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t ${IMAGE_NAME}:sha-${GITHUB_SHA} -t ${IMAGE_NAME}:latest .
+        run: docker build --no-cache -t ${IMAGE_NAME}:sha-${GITHUB_SHA} -t ${IMAGE_NAME}:latest .
 
       - name: Push Docker image tags
         run: |

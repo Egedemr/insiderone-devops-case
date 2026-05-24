@@ -82,8 +82,5 @@ Trivy is configured to fail the pipeline when `HIGH` or `CRITICAL` vulnerabiliti
 ### Image publishing
 The release workflow publishes the container image to GitHub Container Registry (GHCR) on pushes to `main` and tags matching `v*`.
 
-Published tags:
-- `ghcr.io/egedemr/insiderone-devops-case:sha-${{ github.sha }}`
-- `ghcr.io/egedemr/insiderone-devops-case:latest`
-
-This keeps one immutable SHA-based image tag for traceability and one rolling `latest` tag for simple consumption.
+- `latest` is the rolling tag for the most recent published build.
+- `sha-${{ github.sha }}` is the immutable tag used for traceability.
