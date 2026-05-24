@@ -1,0 +1,39 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+
+env:
+  IMAGE_NAME: ghcr.io/egedemr/insiderone-devops-case
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Docker image
+        run: docker build -t ${IMAGE_NAME}:sha-${GITHUB_SHA} -t ${IMAGE_NAME}:latest .
+
+      - name: Push Docker image tags
+        run: |
+          docker push ${IMAGE_NAME}:sha-${GITHUB_SHA}
+          docker push ${IMAGE_NAME}:latest

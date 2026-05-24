@@ -62,3 +62,28 @@ python -m pytest -q
 
 ## Why FastAPI
 FastAPI is lightweight, fast to start with, easy to test, and fits cleanly into container-first DevOps workflows.
+
+## CI/CD
+
+### CI workflow
+GitHub Actions runs on pull requests and pushes to `main`.
+
+The CI pipeline:
+- checks out the repository
+- sets up Python 3.12
+- installs dependencies from `requirements.txt`
+- runs `pytest`
+- builds the Docker image
+- scans the built image with Trivy
+- scans the repository for secrets with gitleaks
+
+Trivy is configured to fail the pipeline when `HIGH` or `CRITICAL` vulnerabilities are detected.
+
+### Image publishing
+The release workflow publishes the container image to GitHub Container Registry (GHCR) on pushes to `main` and tags matching `v*`.
+
+Published tags:
+- `ghcr.io/egedemr/insiderone-devops-case:sha-${{ github.sha }}`
+- `ghcr.io/egedemr/insiderone-devops-case:latest`
+
+This keeps one immutable SHA-based image tag for traceability and one rolling `latest` tag for simple consumption.
