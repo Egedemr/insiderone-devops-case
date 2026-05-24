@@ -34,7 +34,7 @@ jobs:
         run: python -m pytest -q
 
       - name: Build Docker image
-        run: docker build -t insiderone-api:ci .
+        run: docker build --no-cache -t insiderone-api:ci .
 
       - name: Run Trivy image scan
         uses: aquasecurity/trivy-action@v0.35.0
