@@ -20,7 +20,7 @@ flowchart LR
   Docker --> Minikube[Minikube]
   Minikube --> Helm[Helm Release]
 
-  App --> Metrics[/metrics]
+  App --> Metrics["/metrics endpoint"]
   Metrics --> Prometheus[Prometheus]
   Prometheus --> Grafana[Grafana]
 ```

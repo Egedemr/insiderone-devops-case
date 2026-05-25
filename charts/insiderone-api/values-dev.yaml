@@ -1,5 +1,8 @@
 replicaCount: 1
 
+image:
+    tag: day2
+    
 env:
   APP_VERSION: dev
 
@@ -10,3 +13,4 @@ resources:
   limits:
     cpu: 150m
     memory: 128Mi
+  
