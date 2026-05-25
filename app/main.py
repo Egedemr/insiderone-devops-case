@@ -2,13 +2,14 @@ import logging
 import os
 
 from fastapi import FastAPI, Request
+from prometheus_fastapi_instrumentator import Instrumentator
 
 from app.core.logging import configure_logging
 
 configure_logging()
 logger = logging.getLogger("app")
-
 app = FastAPI(title="insiderone-devops-case", version="0.1.0")
+Instrumentator().instrument(app).expose(app, endpoint="/metrics")
 
 
 @app.middleware("http")

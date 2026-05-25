@@ -1,5 +1,5 @@
 services:
-  api:
+  app:
     build: .
     container_name: insiderone-api
     env_file:
@@ -11,3 +11,21 @@ services:
     volumes:
       - ./app:/app/app
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    container_name: insiderone-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    depends_on:
+      - app
+
+  grafana:
+    image: grafana/grafana:11.2.0
+    container_name: insiderone-grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
