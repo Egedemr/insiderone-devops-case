@@ -1,5 +1,8 @@
 # insiderone-devops-case
 
+![CI](https://github.com/Egedemr/insiderone-devops-case/actions/workflows/ci.yml/badge.svg)
+![Release](https://github.com/Egedemr/insiderone-devops-case/actions/workflows/release.yml/badge.svg)
+
 ## Final project overview
 - Small production-minded FastAPI API for the DevOps case study
 - Includes Docker, Helm/Minikube, GitHub Actions CI/CD, and local observability
